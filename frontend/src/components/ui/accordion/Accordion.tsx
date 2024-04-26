@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 
 const AccordionDemo = () => (
-  <Accordion.Root className="AccordionRoot" type="single" defaultValue="item-1" collapsible>
+  <Accordion.Root className="AccordionRoot" type="single" defaultValue="item-2" collapsible>
     <Accordion.Item className="AccordionItem" value="item-1">
       <AccordionTrigger>Is it accessible?</AccordionTrigger>
       <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
