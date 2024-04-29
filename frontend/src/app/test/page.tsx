@@ -1,11 +1,14 @@
-import AccordionDemo from '@/components/accordion/Accordion'
-import React, { useState } from 'react'
+import AccordionDemo from '@/components/Accordion'
+
+import RQProvider from '@/context/RQProvider'
 
 
 export default function page() {
   return (
     <div>
-      <AccordionDemo/>
+      <RQProvider>
+        <AccordionDemo />
+      </RQProvider>
     </div>
   )
 }
