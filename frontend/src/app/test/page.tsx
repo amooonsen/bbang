@@ -1,4 +1,4 @@
-import AccordionDemo from '@/components/ui/accordion/Accordion'
+import AccordionDemo from '@/components/accordion/Accordion'
 import React, { useState } from 'react'
 
 
