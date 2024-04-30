@@ -3,7 +3,7 @@ import {useQuery} from "@tanstack/react-query";
 
 import { getTrends } from '@/service/getTrends';
 
-export default function TrendSection() {
+export default function SmapleQuery() {
   const { data } = useQuery({
     queryKey: ['trends'],
     queryFn: getTrends,
