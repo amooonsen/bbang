@@ -9,10 +9,22 @@ export async function getTrends() {
   //   credentials: 'include',
   //   cache: 'no-store',
   // });
-  const res = await fetch(`https://openapi.gg.go.kr/RESRESTRT??KEY=18e1d92bf8c24dca87a372d1215cc5ad`, {
-    // next: {
-    //   tags: ['REFINE_LOTNO_ADDR'],
-    // },
+
+
+  /**
+   * 순서대로
+   * baseURL: https://openapi.gg.go.kr/RESRESTRT?
+   * 키지정 : KEY=18e1d92bf8c24dca87a372d1215cc5ad 
+   * 타입: &TYPE=json (기본값은 xml로 되어 있어 변경)
+   * 페이지 위치: &pIndex=2
+   * 페이지당 요청수: &pSize=30
+   * 요청인자(시군코드):&SIGUN_CD=41310
+   * 참고 url : https://data.gg.go.kr/portal/intro/develop/searchBulletinPage.do
+   */
+  const res = await fetch(`https://openapi.gg.go.kr/RESRESTRT??KEY=18e1d92bf8c24dca87a372d1215cc5ad&TYPE=json&pIndex=2&pSize=30&SIGUN_CD=41310`, {
+    next: {
+      tags: ['restaruant'],
+    },
     // 옵션
     // credentials: 'include',
     // cache: 'no-store',
@@ -21,7 +33,7 @@ export async function getTrends() {
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
-  
+
 
   return res.json()
 }

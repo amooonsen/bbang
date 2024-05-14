@@ -1,7 +1,7 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { getTrends } from '@/service/getTrends';
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function SmapleQuery() {
   const { data } = useQuery({
@@ -11,21 +11,23 @@ export default function SmapleQuery() {
     gcTime: 300 * 1000,
   })
 
-  useEffect(() => {
-    // if (!data) return;
-    console.log(data)
-  }, [data])
+  const [loadData, setLoadData] = useState([])
 
+  useEffect(() => {
+    if (data?.RESRESTRT && data.RESRESTRT[1] && data.RESRESTRT[1].row) {
+      setLoadData(data.RESRESTRT[1].row);
+    }
+  }, [data]);
+  console.log(loadData)
   return (
     <div>
       <div>
         <h3>나를 위한 트렌드</h3>
-        
-        {/* {
-          data.map(post => {
-            <li key={post.id}>{post.title}</li>
-          })
-        } */}
+        <ul>
+          {loadData.map((item, index) => (
+            <li key={index}>{item.BIZPLC_NM}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );
