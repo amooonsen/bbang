@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-interface PostsModel {
+export interface PostsModel {
   id: number;
   author: string;
   title: string;
@@ -9,7 +9,8 @@ interface PostsModel {
   commentCount: number;
 }
 
-type TypePost = Pick<PostsModel, 'author' | 'title' | 'content'>
+export type TypeCreatePost = Pick<PostsModel, 'author' | 'title' | 'content'>;
+export type UpdatePost = Omit<PostsModel, 'likeCount' | 'commentCount'>;
 
 let posts: PostsModel[] = [
   {
@@ -20,7 +21,7 @@ let posts: PostsModel[] = [
     likeCount: 100,
     commentCount: 20
   }
-]
+];
 
 @Injectable()
 export class PostsService {
@@ -29,14 +30,14 @@ export class PostsService {
   }
 
   getPostById(id: number): PostsModel {
-    const post: PostsModel = posts.find((post: PostsModel): boolean => post.id === id)
-
-    if (!post) throw new (NotFoundException)
-
-    return post
+    const post = posts.find(post => post.id === id);
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+    return post;
   }
 
-  createPost({ author, title, content }: TypePost): PostsModel {
+  createPost({ author, title, content }: TypeCreatePost): PostsModel {
     const newId: number = posts.length > 0 ? posts[posts.length - 1].id + 1 : 1;
     const post: PostsModel = {
       id: newId,
@@ -45,10 +46,33 @@ export class PostsService {
       content,
       likeCount: 0,
       commentCount: 0
+    };
+    posts = [...posts, post];
+    return post;
+  }
+
+  updatePost({ id, author, title, content }: UpdatePost): PostsModel {
+    const post = posts.find(post => post.id === id);
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+    if (author) post.author = author;
+    if (title) post.title = title;
+    if (content) post.content = content;
+
+    posts = posts.map(prevPost => prevPost.id === id ? post : prevPost)
+
+    return post;
+  }
+
+  deletePost(postId: number) {
+    const post = posts.find(post => post.id === postId)
+    if (!post) {
+      throw new NotFoundException('Post not found');
     }
 
-    posts = [...posts, post]
+    posts = posts.filter(post => post.id !== postId)
 
-    return post
+    return postId
   }
 }
