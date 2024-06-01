@@ -1,0 +1,2 @@
+# backend 폴더 내부의 postgres docker 모듈 제외
+backend/postgres-data

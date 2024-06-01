@@ -1,16 +1,15 @@
-import AccordionDemo from '@/components/Accordion'
-import SmapleQuery from '@/components/test/SampleQuery'
+import AccordionDemo from "@/components/Accordion";
+import SmapleQuery from "@/components/test/SampleQuery";
 
-import RQProvider from '@/context/RQProvider'
-
+import RQProvider from "@/context/RQProvider";
 
 export default function page() {
   return (
     <div>
       <RQProvider>
         <AccordionDemo />
-        <SmapleQuery/>
+        <SmapleQuery />
       </RQProvider>
     </div>
-  )
+  );
 }
