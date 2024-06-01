@@ -20,5 +20,5 @@ export default function page() {
         <SmapleQuery/>
       </RQProvider> */}
     </div>
-  )
+  );
 }
