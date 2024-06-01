@@ -4,6 +4,5 @@
   "htmlWhitespaceSensitivity": "strict",
   "endOfLine": "lf",
   "printWidth": 140,
-  "singleQuote": true,
-  "trailingComma": "all"
+  "singleQuote": true
 }
