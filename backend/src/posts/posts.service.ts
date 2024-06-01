@@ -15,17 +15,6 @@ export interface PostModel {
 export type TypeCreatePost = Pick<PostModel, 'author' | 'title' | 'content'>;
 export type UpdatePost = Omit<PostModel, 'likeCount' | 'commentCount'>;
 
-let posts: PostModel[] = [
-  {
-    id: 1,
-    author: '조경문',
-    title: '오늘 비가 많이 오네요',
-    content: '비가 오는 날엔 ~ ~ ~ ',
-    likeCount: 100,
-    commentCount: 20,
-  },
-];
-
 @Injectable()
 export class PostsService {
   constructor(
@@ -91,5 +80,17 @@ export class PostsService {
     return newPost;
   }
 
-  deletePost(postId: number) {}
+  async deletePost(id: number) {
+    const post = await this.postRepository.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    return await this.postRepository.delete(id);
+  }
 }
