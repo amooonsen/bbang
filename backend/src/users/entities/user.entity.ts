@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, Entity } from 'typeorm';
+import { Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, Entity, VersionColumn } from 'typeorm';
 
 @Entity()
 export class UserModel {
@@ -7,15 +7,15 @@ export class UserModel {
   id: string;
 
   // 이메일 (고유한 값)
-  @Column({ unique: true })
+  @Column({ unique: true, type: 'varchar' })
   email: string;
 
   // 사용자 이름
-  @Column()
+  @Column({ type: 'varchar' })
   userName: string;
 
   // 비밀번호 (암호화된 값 저장)
-  @Column()
+  @Column({ type: 'varchar' })
   password: string;
 
   // 생성일
@@ -39,15 +39,15 @@ export class UserModel {
   age?: number;
 
   // 주소
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   address?: string;
 
   // 전화번호
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   phoneNumber?: string;
 
   // 프로필 사진 URL
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   profilePictureUrl?: string;
 
   // 마지막 로그인 시간
@@ -61,4 +61,9 @@ export class UserModel {
   // 활성화 여부
   @Column({ default: true })
   isActive: boolean;
+
+  // 데이터 업데이트 확인용
+  // save 함수 호출된 횟수 기입
+  @VersionColumn()
+  version: number;
 }
