@@ -3,11 +3,10 @@ services:
     image: postgres:15
     restart: always
     volumes:
-      # 현재 로컬 postgres와 docker image와 맵핑
-      - ./postgres-data:/var/lib/postgres/data
+      - ./postgres-data:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - '5431:5431'
     environment:
-      - POSTGRES_USER: postgres
-      - POSTGRES_PASSWORD: postgres
-      - POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
