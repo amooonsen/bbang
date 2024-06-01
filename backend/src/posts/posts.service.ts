@@ -56,6 +56,8 @@ export class PostsService {
      * create는 객체를 생성해주는 작업이기 때문에 동기적으로 실행됨.
      *
      * 2. save -> create에서 생성한 객체를 저장한다
+     * 만약에 데이터가 존재하지 않는다면 (id 기준으로) 새로 생성한다.
+     * 만약에 데이터가 존재한다면 (같은 id의 값이 존재한다면) 존재하던 값을 업데이트 한다.
      */
     const post = this.postRepository.create({
       author,
@@ -71,8 +73,12 @@ export class PostsService {
     return newPost;
   }
 
-  updatePost({ id, author, title, content }: UpdatePost): PostModel {
-    const post = posts.find((post) => post.id === id);
+  async updatePost({ id, author, title, content }: UpdatePost) {
+    const post = await this.postRepository.findOne({
+      where: {
+        id,
+      },
+    });
     if (!post) {
       throw new NotFoundException('Post not found');
     }
@@ -80,19 +86,10 @@ export class PostsService {
     if (title) post.title = title;
     if (content) post.content = content;
 
-    posts = posts.map((prevPost) => (prevPost.id === id ? post : prevPost));
+    const newPost = await this.postRepository.save(post);
 
-    return post;
+    return newPost;
   }
 
-  deletePost(postId: number) {
-    const post = posts.find((post) => post.id === postId);
-    if (!post) {
-      throw new NotFoundException('Post not found');
-    }
-
-    posts = posts.filter((post) => post.id !== postId);
-
-    return postId;
-  }
+  deletePost(postId: number) {}
 }

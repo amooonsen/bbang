@@ -26,12 +26,7 @@ export class PostsController {
 
   // 4) PUT /posts/:id
   @Put(':id')
-  putPosts(
-    @Param('id') id: string,
-    @Body('author') author: string,
-    @Body('title') title: string,
-    @Body('content') content: string,
-  ): UpdatePost {
+  putPosts(@Param('id') id: string, @Body('author') author: string, @Body('title') title: string, @Body('content') content: string) {
     return this.postsService.updatePost({ id: +id, author, title, content });
   }
 
