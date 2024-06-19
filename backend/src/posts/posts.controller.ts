@@ -1,6 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { PostsService } from './posts.service';
 
+
 /**
  * author: string;
  * title: string;
