@@ -1,0 +1,77 @@
+@use '../abstracts' as *;
+
+.component-tab {
+  &.one-depth-tab {
+    .tab-list {
+      display: flex;
+      justify-content: center;
+    }
+
+    .tab-trigger {
+      display: inline-flex;
+      @include rem(height, 64);
+      @include rem(padding, 0 32);
+      align-items: center;
+      justify-content: center;
+      @include rem(font-size, $f20);
+      line-height: $l20;
+      white-space: nowrap;
+      transition: all $custom-duration $custom-ease;
+
+      &[data-state='active'] {
+        border: 2px solid transparent;
+        border-image-source: linear-gradient(
+          270deg,
+          #1953e4 0%,
+          #4344e7 22%,
+          #6039e9 56%,
+          #7432eb 86%
+        );
+        border-image-slice: 1;
+        color: $secondary04;
+        font-weight: 700;
+        box-shadow: $kpmg-glass-shadow;
+      }
+
+      &[data-state='inactive'] {
+        border: none;
+        background: $bg-f5f5f5;
+        color: $font-aaaaaa;
+      }
+    }
+  }
+
+  // 공통 탭리스트
+  .tab-list {
+  }
+
+  .tab-content {
+  }
+}
+
+// ############################################# Mo #############################################
+
+@media (max-width: 1076px) {
+  .component-tab {
+    &.one-depth-tab {
+      .tab-list {
+        width: 100%;
+      }
+      .tab-trigger {
+        flex: 1;
+        @include rem(height, 59);
+        padding: 0;
+        @include rem(font-size, $f18);
+        line-height: $l18;
+        white-space: normal;
+      }
+    }
+
+    // 공통 탭리스트
+    .tab-list {
+    }
+
+    .tab-content {
+    }
+  }
+}

@@ -1,0 +1,65 @@
+@use '../abstracts' as *;
+
+.component-caption {
+  @include rem(padding-left, 12);
+  position: relative;
+  color: $font-444444;
+
+  .dot {
+    position: absolute;
+    left: 0;
+    @include rem(top, 10);
+    @include rem(width, 4);
+    @include rem(height, 4);
+    border-radius: 100%;
+    background: $font-444444;
+  }
+
+  &.regular {
+    @include rem(font-size, $f16);
+    line-height: $l16;
+    font-weight: 400;
+  }
+
+  &.small {
+    @include rem(font-size, $f14);
+    line-height: $l14;
+  }
+
+  &.margin-small {
+    + .margin-small {
+      @include rem(margin-top, 8);
+    }
+  }
+
+  &.margin-regular {
+    + .margin-regular {
+      @include rem(margin-top, 16);
+    }
+  }
+}
+
+// ############################################# Mo #############################################
+@media (max-width: 1076px) {
+  .component-caption {
+    .dot {
+      @include rem(top, 8);
+    }
+    &.regular {
+      @include rem(font-size, $f14);
+      line-height: $l14;
+    }
+
+    &.margin-small {
+      + .margin-small {
+        @include rem(margin-top, 4);
+      }
+    }
+
+    &.margin-regular {
+      + .margin-regular {
+        @include rem(margin-top, 8);
+      }
+    }
+  }
+}

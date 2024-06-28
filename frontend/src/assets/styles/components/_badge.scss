@@ -1,0 +1,15 @@
+@use "../abstracts" as *;
+
+.badge {
+  position: relative;
+
+  .badge-txt {
+    @include rem(font-size, $f14);
+    line-height: $l14;
+    font-weight: 500;
+    color: $primary;
+  }
+}
+
+// ############################################# Mo #############################################
+@media (max-width: 1023px) {}

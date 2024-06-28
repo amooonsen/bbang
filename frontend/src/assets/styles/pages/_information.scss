@@ -1,0 +1,53 @@
+@use '../abstracts' as *;
+
+.information-page {
+  .top-visual {
+    background-image: url(/images/information/bg_info_visual_01.jpg);
+  }
+  .sec-content {
+    .inner {
+      width: 100%;
+      @include rem(max-width, 1380);
+      @include rem(padding, 120 0 200);
+      margin: 0 auto;
+    }
+  }
+  .tab-content {
+    @include rem(margin-top, 80);
+  }
+  .btn-wrap {
+    display: flex;
+    @include rem(margin-top, 80);
+    justify-content: center;
+  }
+}
+
+// ############################################# Mo #############################################
+@media (min-width: 1077px) and (max-width: 1700px) {
+  .information-page {
+    .tab-content {
+      .tab-inner {
+        @include rem(padding, 0 24);
+      }
+    }
+  }
+}
+
+@media (max-width: 1076px) {
+  .information-page {
+    .top-visual {
+      background-position: left bottom;
+    }
+    .sec-content {
+      .inner {
+        @include rem(padding, 64 24 120);
+      }
+    }
+    .tab-content {
+      @include rem(margin-top, 56);
+    }
+    .btn-wrap {
+      @include rem(margin-top, 56);
+    }
+  }
+}

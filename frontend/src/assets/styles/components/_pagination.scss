@@ -1,0 +1,53 @@
+@use '../abstracts' as *;
+
+.component-pagination {
+  display: flex;
+
+  .previous>a,
+  .next>a,
+  .break>a,
+  .pagination-link {
+    display: inline-flex;
+    @include rem(width, 40);
+    @include rem(height, 40);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .previous {
+    @include rem(margin-right, 12);
+    transform: rotate(180deg);
+  }
+
+  .next {
+    @include rem(margin-left, 12);
+  }
+
+  .pagination-link {
+    @include rem(font-size, $f16);
+    line-height: $l16;
+    font-weight: 500;
+    color: $font-444444;
+
+    &:hover {
+      background-color: $bg-f5f5f5;
+    }
+
+    &-active {
+      font-weight: 700;
+      color: $secondary04;
+      border: 2px solid transparent;
+      border-image-source: linear-gradient(270deg,
+          #1953e4 0%,
+          #4344e7 22%,
+          #6039e9 56%,
+          #7432eb 86%);
+      border-image-slice: 1;
+
+      &:hover {
+        background-color: $bg-ffffff;
+      }
+    }
+  }
+}

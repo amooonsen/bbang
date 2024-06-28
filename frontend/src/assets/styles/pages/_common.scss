@@ -1,0 +1,1369 @@
+@use '../abstracts' as *;
+
+// s: ######################################### Common #########################################
+
+// [공통] 컨텐츠 너비 정의
+
+.contents-layout {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  @include rem(column-gap, 36);
+  @include rem(max-width, 1380);
+  margin: 0 auto;
+
+  &.type02 {
+    @include rem(max-width, 908);
+  }
+
+  &.full {
+    display: block;
+    width: 100%;
+  }
+}
+
+.layout-sub-visual {
+  @include rem(max-width, 1380);
+  margin: 0 auto;
+  @include rem(padding-top, 160);
+}
+
+// [공통] 서브페이지 상단 비쥬얼 영역
+.visual-wrap {
+  .visual-head {
+    @include rem(padding, 120 0 80);
+    @include rem(row-gap, 40);
+  }
+
+  .head-tit {
+    grid-column: span 6 / span 6;
+    @include rem(font-size, $f80);
+    line-height: $l18;
+    font-weight: 700;
+  }
+
+  .head-desc {
+    grid-row: 2;
+    grid-column: 7 / 13;
+    @include rem(font-size, $f24);
+    line-height: $l24;
+  }
+
+  .img-wrap {
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+}
+
+// [공통] 서브페이지 헤딩 그룹
+
+.hgroup-component {
+  .hgroup-tit {}
+
+  .hgroup-sub-tit {
+    @include rem(font-size, $f40);
+    line-height: $l40;
+    font-weight: 700;
+
+    &+p {
+      @include rem(margin-top, 24);
+      @include rem(font-size, $f20);
+      line-height: $l20;
+    }
+  }
+}
+
+// [공통] 게시판 리스트
+.board-list-wrap {
+  @include rem(padding-top, 72);
+  @include rem(row-gap, 77);
+
+  .board-item {
+    .thumbnail-wrap {
+      position: relative;
+
+      .badge {
+        position: absolute;
+        @include rem(top, -16);
+        @include rem(left, 20);
+        z-index: 1;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        vertical-align: top;
+        object-fit: cover;
+      }
+    }
+
+    .board-tit {
+      display: inline-block;
+      @include rem(margin-top, 28);
+      @include rem(font-size, $f24);
+      line-height: $l24;
+      font-weight: 700;
+      @include ellipsis(1);
+      width: 100%;
+    }
+
+    .board-preview {
+      @include rem(margin-top, 12);
+      @include rem(font-size, $f18);
+      line-height: $l18;
+      font-weight: 500;
+      color: $font-777777;
+      @include ellipsis(2);
+    }
+
+    .upload-date {
+      @include rem(margin-top, 32);
+      @include rem(font-size, $f16);
+      font-weight: 500;
+      color: $font-aaaaaa;
+    }
+
+    &:hover {
+      .thumbnail-wrap {}
+    }
+  }
+}
+
+// [공통] 게시판 상세
+
+.board-contents {
+  .breadcrumb {
+    display: flex;
+    justify-content: flex-end;
+    @include rem(max-width, 1380);
+    margin: 0 auto;
+
+    ul {
+      display: flex;
+      align-items: center;
+      @include rem(gap, 12);
+      color: $font-aaaaaa;
+
+      li {
+        @include rem(font-size, $f14);
+        line-height: $l14;
+
+        &:first-child {
+          @include rem(padding, 3);
+        }
+
+        &:last-child {
+          font-weight: 700;
+          color: $font-0F223A;
+        }
+      }
+    }
+  }
+
+  .contents-layout {
+    @include rem(margin-top, 80);
+  }
+
+  .contents-head {
+    @include rem(padding, 24 0 28);
+    border-top: 2px solid $line-0F223A;
+    border-bottom: 1px solid $line-eeeeee;
+
+    .hgroup-component {
+      @include rem(margin-top, 12);
+
+      .board-tit {
+        @include rem(font-size, $f24);
+        line-height: $l24;
+        font-weight: 700;
+      }
+    }
+
+    .posted-tag {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .posted-date {
+        @include rem(font-size, $f16);
+        line-height: $l16;
+        color: $font-aaaaaa;
+      }
+    }
+  }
+
+  .contents-body {
+    @include rem(margin-top, 40);
+
+    .body-img-wrap {
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .view-cont {
+      @include rem(margin-top, 24);
+      @include rem(padding-bottom, 80);
+      border-bottom: 1px solid $line-eeeeee;
+      @include rem(font-size, $f18);
+      line-height: $l18;
+    }
+
+    .btn-rotue-list-wrap {
+      display: block;
+      @include rem(margin-top, 80);
+      text-align: center;
+
+      .btn {
+        display: inline-flex;
+      }
+    }
+  }
+
+  .contents-related {
+    position: relative;
+    @include rem(margin, 120 0 184);
+
+    .board-list-tit {
+      @include rem(font-size, $f32);
+      line-height: $l32;
+      font-weight: 700;
+    }
+
+    .board-list-wrap {
+      display: flex;
+      @include rem(gap, 36);
+
+      &.half-contents {
+        .board-item {
+          max-width: 50%;
+        }
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+// [공통] 서브페이지 더보기 버튼 영역
+
+.btn-more-wrap {
+  @include rem(margin-top, 80);
+  @include rem(padding-bottom, 160);
+  text-align: center;
+}
+
+// [공통] 매수,매도, 회원가입 진행 스텝
+
+.step-wrap {
+  @include rem(padding, 72 0 200);
+  background: #f6f4f9;
+  overflow: hidden;
+
+  &>.hgroup-component {
+    @include rem(margin-bottom, 64);
+    text-align: center;
+
+    h2 {
+      @include rem(font-size, $f40);
+      line-height: $l40;
+      font-weight: 700;
+    }
+
+    p {
+      @include rem(margin-top, 12);
+      @include rem(font-size, $f18);
+      line-height: $l18;
+    }
+  }
+
+  .required-message {
+    @include rem(max-width, 1380);
+    @include rem(margin, 0 auto 16);
+    @include rem(font-size, $f16);
+    line-height: $l16;
+    font-weight: 400;
+    text-align: right;
+    color: $font-777777;
+
+    .required-mark {
+      color: $secondary05;
+    }
+  }
+
+  .step-body {
+    display: flex;
+    @include rem(padding, 80 118 88);
+    background: $bg-ffffff;
+  }
+
+  .step-body-info {
+    flex: 1;
+
+    .required-message {
+      display: none;
+    }
+  }
+
+  .step-count {
+    display: flex;
+    @include rem(gap, 8);
+
+    li {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      @include rem(height, 32);
+      @include rem(font-size, $f14);
+      line-height: $l14;
+
+      .step-tit {
+        display: none;
+        @include rem(margin-left, 8);
+      }
+
+      &.active {
+        @include rem(padding, 0 16);
+        @include rem(border-radius, 32);
+        font-weight: 700;
+        background: $primary-gradient;
+        color: $font-ffffff;
+
+        .step-tit {
+          display: block;
+          white-space: nowrap;
+        }
+      }
+
+      &.inactive {
+        @include rem(padding, 0 12);
+        border-radius: 100%;
+        color: $font-777777;
+        background: $bg-f5f5f5;
+      }
+
+      &.complete {
+        @include rem(width, 32);
+        border-radius: 100%;
+        border: 2px solid transparent;
+        background-image: linear-gradient(#fff, #fff), $primary-gradient;
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+        background-color: transparent;
+      }
+    }
+  }
+
+  .info-content {
+    @include rem(margin-top, 56);
+
+    .content-step {
+      @include rem(font-size, $f18);
+      line-height: $l18;
+      font-weight: 700;
+      color: $secondary04;
+    }
+
+    .content-tit {
+      @include rem(font-size, $f40);
+      line-height: $l40;
+      font-weight: 700;
+    }
+
+    .content-desc {
+      @include rem(margin-top, 24);
+      @include rem(font-size, $f20);
+      line-height: $l20;
+
+      .point {
+        display: inline-flex;
+        align-items: center;
+        height: auto;
+        @include rem(font-size, 24);
+        line-height: $l24;
+        font-weight: 700;
+        overflow: hidden;
+
+        .digit {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  .info-caption {}
+
+  .step-body-form {
+    flex: 1;
+
+    .input-wrap {
+      &~.input-wrap {
+        @include rem(margin-top, 40);
+      }
+
+      &.input-group-item {
+        @include rem(margin-top, 8);
+      }
+
+      &.financials-zone {
+        display: flex;
+        @include rem(gap, 8);
+
+        &>input {
+          @include rem(width, 200);
+        }
+
+        .input-currency {
+          flex: 1;
+        }
+      }
+
+      .range-input {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        div {
+          position: relative;
+          flex: 1;
+        }
+
+        .tiled {
+          @include rem(margin, 0 8);
+          @include rem(font-size, $f16);
+          line-height: $l16;
+        }
+      }
+    }
+
+    .inner-btn-zone {
+      display: flex;
+      @include rem(gap, 8);
+
+      .label-file-upload {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 0;
+      }
+
+      &.file-input {
+        &:not(:first-of-type) {
+          @include rem(margin-top, 12);
+        }
+      }
+
+      .btn-plus,
+      .btn-minus {
+        border: 1px solid $line-eeeeee;
+        @include rem(padding, 20);
+      }
+    }
+
+    .btn-wrap {
+      display: flex;
+      @include rem(gap, 16);
+      @include rem(margin-top, 64);
+    }
+
+    .btn-certification {
+      width: 100%;
+      @include rem(height, 64);
+      @include rem(margin-top, 40);
+    }
+
+    .all-agree-area {
+      border: 1px solid $line-eeeeee;
+      @include rem(padding, 24 28);
+
+      .input-label {
+        @include rem(font-size, $f16);
+        line-height: $l16;
+      }
+
+      .btn-trigger {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+
+        svg {
+          transform: rotate(-90deg);
+        }
+      }
+
+      .required-txt {
+        color: $primary;
+        font-weight: 700;
+      }
+
+      .checkbox-item {
+        &.global-checkbox {
+          @include rem(margin-top, 12);
+        }
+      }
+    }
+  }
+}
+
+// [공통] 그라데이션 텍스트
+
+.gradient-text {
+  background: $primary-gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// 공통 꺽쇠(arrow)
+.arrow {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    @include rem(width, 4);
+    @include rem(height, 4);
+    border-top: 1px solid $line-aaaaaa;
+    border-right: 1px solid $line-aaaaaa;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+}
+
+// 공통 썸네일 이미지 게시판
+.thumb-card-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  @include rem(gap, 56 36);
+
+  .img-wrap {
+    height: 0;
+    padding-bottom: 59.1743%;
+    position: relative;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+  }
+
+  .badge {
+    @include rem(margin-top, 28);
+  }
+
+  .card-item-tit {
+    @include rem(font-size, $f24);
+    line-height: $l24;
+    font-weight: 700;
+    @include ellipsis;
+  }
+
+  .card-item-txt {
+    @include rem(height, 54);
+    @include rem(margin-top, 12);
+    @include rem(font-size, $f18);
+    line-height: $l18;
+    font-weight: 500;
+    color: $font-777777;
+    @include ellipsis(2);
+  }
+
+  .date {
+    @include rem(margin-top, 24);
+    @include rem(font-size, $f16);
+    line-height: $l16;
+    font-weight: 500;
+    color: $font-aaaaaa;
+  }
+
+  &.type01 {
+    .card-item-tit {
+      @include rem(margin-top, 16);
+    }
+  }
+
+  &.type02 {
+    .card-item-tit {
+      @include rem(margin-top, 28);
+    }
+  }
+
+  &.type04 {
+    .card-item-tit {
+      @include rem(margin-top, 28);
+      transition: opacity 0.35s;
+    }
+
+    .img-wrap {
+      .btn-more {
+        position: absolute;
+        @include rem(right, 32);
+        @include rem(bottom, 24);
+        transition: opacity 0.35s;
+        opacity: 0;
+        z-index: 1;
+      }
+
+      &::after {
+        content: '';
+        display: inline-block;
+        @include rem(width, 100%);
+        @include rem(height, 100%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: linear-gradient(42.56deg,
+            rgba(36, 4, 68, 0.3) 1.03%,
+            rgba(116, 50, 235, 0.21) 43.59%,
+            rgba(25, 83, 228, 0.042) 74.41%),
+          linear-gradient(248.16deg, rgba(25, 83, 228, 0.05) 3.98%, rgba(86, 0, 116, 0.2) 108.89%);
+        transition: opacity 0.35s;
+        opacity: 0;
+      }
+
+      &:hover {
+
+        .btn-more,
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+// 공통 탑 비주얼
+.top-visual {
+  width: 100%;
+  @include rem(height, 960);
+  @include rem(padding-top, 96);
+  @include rem(margin-top, -96);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  .inner {
+    width: 100%;
+    @include rem(max-width, 1380);
+    @include rem(padding, 0 82);
+    margin: 0 auto;
+  }
+
+  .tit {
+    @include rem(margin, 180 0 40);
+    @include rem(font-size, $f80);
+    line-height: $l80;
+    font-weight: 700;
+    color: $font-ffffff;
+  }
+
+  .txt {
+    display: block;
+    @include rem(font-size, $f20);
+    line-height: $l20;
+    font-weight: 500;
+    color: $font-ffffff;
+  }
+}
+
+// 정보 아이템 목록
+.info-item-wrap {
+  .info-item {
+    +.info-item {
+      @include rem(margin-top, 40);
+    }
+  }
+
+  .info-tit {
+    @include rem(margin-bottom, 12);
+    @include rem(font-size, $f18);
+    line-height: $l18;
+    font-weight: 700;
+
+    .required-mark {
+      color: $secondary05;
+    }
+  }
+
+  .info-box {
+    display: flex;
+    align-items: center;
+    @include rem(height, 56);
+    @include rem(padding, 17 20);
+    background-color: $bg-e5e5e5;
+  }
+
+  .info-txt {
+    @include rem(font-size, $f16);
+    line-height: $l16;
+    font-weight: 500;
+  }
+}
+
+// 티저 타이틀
+.teaser-tit {
+  @include rem(margin-top, 24);
+  @include rem(font-size, $f24);
+  line-height: $l24;
+  font-weight: 700;
+  text-align: center;
+}
+
+// 티저 다이얼로그
+.teaser-contents {
+  @include rem(margin, 40 0 56);
+  border-bottom: 1px solid $line-e5e5e5;
+
+  .teaser-top-box {
+    @include rem(padding, 32);
+    background-color: $bg-F1F5FD;
+
+    .tit {
+      display: flex;
+      align-items: center;
+      @include rem(margin-bottom, 16);
+      @include rem(font-size, $f20);
+      line-height: $l20;
+      font-weight: 700;
+
+      &::before {
+        content: '';
+        display: inline-block;
+        @include rem(width, 24);
+        @include rem(height, 24);
+        @include rem(margin-right, 8);
+        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.8698 16.4119L7.66979 19.8001V16.4119H4.20312V5.40015H19.8031V16.4119H12.8698Z' stroke='%2300307D' stroke-linecap='square'/%3E%3Crect x='7.80078' y='10.2002' width='1.5' height='1.5' fill='%2300307D'/%3E%3Crect x='11.4023' y='10.2002' width='1.5' height='1.5' fill='%2300307D'/%3E%3Crect x='15.0039' y='10.2002' width='1.5' height='1.5' fill='%2300307D'/%3E%3C/svg%3E%0A");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+    }
+
+    .desc-area {
+      @include rem(padding-top, 24);
+      border-top: 1px solid $line-e5e5e5;
+    }
+
+    .desc {
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      font-weight: 500;
+    }
+  }
+
+  .teaser-item {
+    @include rem(margin-top, 56);
+
+    .tit {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      @include rem(font-size, $f20);
+      line-height: $l20;
+      font-weight: 700;
+
+      .info {
+        @include rem(font-size, $f14);
+        line-height: $l14;
+        font-weight: 400;
+        color: $font-777777;
+      }
+    }
+
+    .cont {
+      @include rem(margin-top, 8);
+      border-top: 2px solid $line-0F223A;
+    }
+  }
+
+  .overview-list {
+    display: flex;
+    flex-wrap: wrap;
+    @include rem(gap, 16 36);
+    @include rem(margin-top, 16);
+  }
+
+  .overview-item {
+    display: flex;
+    align-items: center;
+    flex: 1 1 40%;
+
+    .item-tit {
+      flex: 0 0 8.2rem;
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      font-weight: 700;
+    }
+
+    .item-txt {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      @include rem(height, 56);
+      @include rem(padding, 0 20);
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      font-weight: 500;
+      background-color: $bg-f5f5f5;
+    }
+  }
+
+  .table-wrap {
+    display: block;
+
+    .table {
+      width: 100%;
+    }
+
+    th {
+      @include rem(padding, 12 20);
+      @include rem(font-size, $f18);
+      line-height: $l18;
+      font-weight: 700;
+      text-align: center;
+      background-color: #f6f4f9;
+      border-bottom: 1px solid $line-e5e5e5;
+    }
+
+    td {
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      font-weight: 700;
+      border-right: 1px solid $line-e5e5e5;
+      border-bottom: 1px solid $line-e5e5e5;
+      text-align: right;
+
+      &:first-child {
+        font-weight: 500;
+        text-align: center;
+      }
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+
+    tr:nth-child(3) td,
+    tr:nth-child(5) td {
+      font-weight: 500;
+      color: $primary;
+    }
+
+    &.type-pc {
+      td {
+        @include rem(padding, 16 20);
+      }
+    }
+
+    &.type-mo {
+      display: none;
+
+      td {
+        @include rem(padding, 12 20);
+      }
+    }
+  }
+
+  .list-group {
+    @include rem(padding, 24);
+    display: flex;
+    flex-wrap: wrap;
+    @include rem(gap, 36);
+
+    .list-wrap {
+      flex: 1 1 40%;
+    }
+
+    .list-tit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include rem(height, 38);
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      font-weight: 700;
+      color: $secondary01;
+      background-color: $bg-F1F5FD;
+    }
+
+    ul {
+      @include rem(margin-top, 9);
+
+      li {
+        @include rem(padding-left, 12);
+        position: relative;
+        @include rem(font-size, $f14);
+        line-height: $l14;
+        font-weight: 500;
+        color: $font-444444;
+
+        &::before {
+          content: '';
+          display: inline-block;
+          @include rem(width, 4);
+          @include rem(height, 4);
+          position: absolute;
+          left: 0;
+          @include rem(top, 8);
+          background-color: $bg-444444;
+          border-radius: 50%;
+          vertical-align: middle;
+        }
+
+        +li {
+          @include rem(margin-top, 3);
+        }
+      }
+    }
+  }
+}
+
+// 404 에러
+.error-page {
+  width: 100%;
+  @include rem(padding-top, 120);
+  text-align: center;
+
+  .page-tit {
+    @include rem(font-size, $f64);
+    line-height: $l64;
+    font-weight: 700;
+    color: $font-ffffff;
+  }
+
+  .section-error {
+    @include rem(width, 672);
+    @include rem(padding, 64 0);
+    @include rem(margin, 64 auto 0);
+    background-color: $global-background-color;
+
+    p {
+      @include rem(font-size, $f18);
+      line-height: $l18;
+      font-weight: 500;
+    }
+  }
+
+  .btn-wrap {
+    display: flex;
+    justify-content: center;
+    @include rem(margin-top, 56);
+
+    .btn.large {
+      flex: 0 auto;
+    }
+  }
+}
+
+.error-page-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url(/images/bg_error.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  z-index: -1;
+}
+
+// e: ######################################### Common #########################################
+
+// ############################################# Mo #############################################
+@media (min-width: 1077px) and (max-width: 1700px) {
+
+  // [공통] 매수,매도, 회원가입 진행 스텝
+  .step-wrap {
+    .step-body {
+      @include rem(margin-right, 24);
+      @include rem(margin-left, 24);
+    }
+  }
+}
+
+@media (max-width: 1076px) {
+
+  // [공통] 컨텐츠 너비 정의
+  .contents-layout {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    @include rem(margin, 0 40);
+    @include rem(column-gap, 28);
+
+    &.full {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  // 공통 썸네일 이미지 게시판
+  .thumb-card-list {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    @include rem(gap, 36);
+
+    .badge {
+      @include rem(margin-top, 24);
+    }
+
+    .card-item-tit {
+      @include rem(font-size, $f20);
+      line-height: $l20;
+    }
+
+    .card-item-txt {
+      @include rem(height, 44);
+      @include rem(margin-top, 8);
+      @include rem(font-size, $f16);
+      line-height: $l16;
+    }
+
+    &.type01 {
+      .card-item-tit {
+        @include rem(margin-top, 12);
+      }
+    }
+
+    &.type02 {
+      .card-item-tit {
+        @include rem(margin-top, 24);
+      }
+    }
+
+    &.type04 {
+      .card-item-tit {
+        @include rem(margin-top, 24);
+      }
+    }
+  }
+
+  // 공통 탑 비주얼
+  .top-visual {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    @include rem(height, 600);
+    @include rem(padding-top, 60);
+    @include rem(margin-top, -60);
+
+    .inner {
+      @include rem(padding, 0 24 48);
+    }
+
+    .tit {
+      @include rem(margin, 0 0 24);
+      @include rem(font-size, $f40);
+      line-height: $l40;
+      font-weight: 700;
+    }
+
+    .txt {
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      font-weight: 500;
+    }
+  }
+
+  // 정보 아이템 목록
+  .info-item-wrap {
+    .info-item {
+      +.info-item {
+        @include rem(margin-top, 36);
+      }
+    }
+  }
+
+  // [공통] 매수,매도, 회원가입 진행 스텝
+  .step-wrap {
+    @include rem(padding, 24 0 0);
+
+    &>.hgroup-component {
+      position: relative;
+      @include rem(padding, 0 24 148);
+      @include rem(margin-bottom, 0);
+      text-align: left;
+
+      h2 {
+        @include rem(font-size, $f32);
+        line-height: $l32;
+      }
+
+      p {
+        @include rem(margin-top, 8);
+        @include rem(font-size, $f16);
+        line-height: $l16;
+      }
+
+      &::after {
+        content: '';
+        display: inline-block;
+        @include rem(width, 112);
+        @include rem(height, 112);
+        position: absolute;
+        @include rem(right, 24);
+        bottom: 0;
+        background-image: url('/images/step/ico_step_member.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+    }
+
+    .hgroup-component {
+      +.required-message {
+        display: none;
+      }
+    }
+
+    .step-body {
+      flex-direction: column;
+      @include rem(padding, 32 24 0);
+      margin: 0;
+    }
+
+    .step-body-info {
+      position: relative;
+
+      .required-message {
+        display: block;
+        @include rem(margin, 10 0 16);
+        @include rem(font-size, $f14);
+        line-height: $l14;
+      }
+    }
+
+    .step-count {
+      @include rem(gap, 4);
+      position: absolute;
+      right: 0;
+
+      li {
+        @include rem(width, 24);
+        @include rem(height, 24);
+        @include rem(font-size, $f12);
+        line-height: $l12;
+        font-weight: 700;
+
+        &.active {
+          padding: 0;
+          border-radius: 100%;
+
+          .step-tit {
+            display: none;
+          }
+        }
+
+        &.inactive {
+          padding: 0;
+        }
+
+        &.complete {
+          width: auto;
+          @include rem(width, 24);
+          color: $secondary04;
+        }
+      }
+    }
+
+    .info-content {
+      margin-top: 0;
+      @include rem(padding-bottom, 40);
+
+      .content-step {
+        @include rem(font-size, $f14);
+        line-height: $l14;
+      }
+
+      .content-tit {
+        @include rem(margin-top, 8);
+        @include rem(font-size, $f24);
+        line-height: $l24;
+      }
+
+      .content-desc {
+        @include rem(margin-top, 12);
+        @include rem(font-size, $f16);
+        line-height: $l16;
+        font-weight: 500;
+
+        .point {
+          @include rem(font-size, $f18);
+          line-height: $l18;
+        }
+      }
+    }
+
+    .step-body-form {
+      @include rem(padding-top, 40);
+      border-top: 1px solid $line-eeeeee;
+
+      .input-wrap {
+        &~.input-wrap {
+          @include rem(margin-top, 36);
+        }
+
+        &.input-group-item {
+          @include rem(margin-top, 12);
+        }
+      }
+
+      .btn-wrap {
+        gap: 0;
+        @include rem(margin, 80 -24 0 -24);
+      }
+
+      .inner-btn-zone {
+        .label-file-upload {
+          @include rem(padding, 16);
+        }
+      }
+
+      .all-agree-area {
+        border: 1px solid $line-eeeeee;
+        @include rem(padding, 24 28);
+
+        .input-label {
+          @include rem(font-size, $f16);
+          line-height: $l16;
+        }
+
+        .btn-trigger {
+          flex: 1;
+          display: flex;
+          justify-content: flex-end;
+
+          svg {
+            transform: rotate(-90deg);
+          }
+        }
+
+        .required-txt {
+          color: $primary;
+          font-weight: 700;
+        }
+
+        .checkbox-item {
+          &.global-checkbox {
+            @include rem(margin-top, 20);
+          }
+        }
+      }
+    }
+  }
+
+  // 티저 다이얼로그
+  .teaser-contents {
+    @include rem(margin, 24 24 80 24);
+    border-bottom: 0;
+
+    .teaser-top-box {
+      @include rem(padding, 24 28);
+
+      .desc-area {
+        @include rem(padding-top, 16);
+      }
+    }
+
+    .overview-list {
+      flex-direction: column;
+      @include rem(gap, 16 0);
+    }
+
+    .overview-item {
+      flex: 0 0 auto;
+    }
+
+    .table-wrap {
+      &.type-pc {
+        display: none;
+      }
+
+      &.type-mo {
+        display: block;
+      }
+    }
+
+    .list-group {
+      flex-direction: column;
+      @include rem(gap, 36 0);
+      @include rem(padding, 16 0 0 0);
+
+      .list-wrap {
+        flex: 0 0 auto;
+      }
+    }
+  }
+
+  .component-dialog {
+    .teaser-contents {
+      &+.dialog-action-zone {
+        button {
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  // 404 에러
+  .error-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    @include rem(padding, 0 24 0);
+
+    .page-tit {
+      @include rem(font-size, $f32);
+      line-height: $l32;
+    }
+
+    .section-error {
+      width: 100%;
+      @include rem(padding, 40 0 0);
+
+      p {
+        @include rem(font-size, $f16);
+        line-height: $l16;
+      }
+    }
+
+    .txt-wrap {
+      @include rem(padding, 0 32);
+    }
+
+    .btn-wrap {
+      @include rem(margin-top, 40);
+
+      .btn.large {
+        flex: 1;
+        color: $font-ffffff;
+        background-color: $primary;
+        border: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+
+  // 공통 탑 비주얼
+  .top-visual {
+    .txt {
+      br {
+        display: none;
+      }
+    }
+  }
+}

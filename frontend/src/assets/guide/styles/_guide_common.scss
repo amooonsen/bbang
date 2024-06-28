@@ -1,0 +1,225 @@
+@use "../../styles/abstracts/index" as *;
+
+// guide-header
+.guide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  left: auto;
+  z-index: 10;
+  @include rem(padding, 0 32);
+  @include rem(height, 50);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #ddd;
+
+  .guide-logo {
+    img {
+      @include rem(width, 127);
+      @include rem(height, 22);
+    }
+  }
+
+  .guide-navigation {
+    ul {
+      display: flex;
+
+      li {
+        @include rem(font-size, 18);
+
+        a {
+          @include rem(padding, 0 10);
+
+          &.active,
+          &:hover {
+            color: $guide-primary;
+            font-weight: bold;
+            transition: .2s color cubic-bezier(0.19, 1, 0.22, 1);
+          }
+        }
+      }
+    }
+  }
+}
+
+// guide-contents
+.guide-wrap {
+
+  input,
+  textarea,
+  button {
+    cursor: pointer;
+
+    &:focus {
+      outline: 1px solid $guide-primary-dark;
+      outline-width: 2px;
+    }
+  }
+
+  .guide-container {
+    @include rem(padding, 40 32);
+    min-height: calc(100vh - 4rem);
+  }
+
+  .guide-tit {
+    @include rem(font-size, 36);
+    font-weight: bold;
+    line-height: 1.5;
+  }
+
+  .guide-desc {
+    @include rem(font-size, 18);
+    line-height: 1.5;
+  }
+
+  .guide-contents {
+    @include rem(margin, 30 0);
+
+    &.grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      @include rem(column-gap, 20);
+      @include rem(row-gap, 20);
+    }
+
+    .grid-item {
+      @include rem(padding, 15);
+      @include rem(border-radius, 12);
+      border: 1px solid $line-dddddd;
+      @include rem(box-shadow, 0px 2 8 rgba(0, 0, 0, 0.15));
+    }
+
+    .row-span-2 {
+      grid-row: span 2 / span 2;
+    }
+
+    .col-span-3 {
+      grid-column: span 3 / span 3;
+    }
+
+    .col-span-6 {
+      grid-column: span 6 / span 6;
+    }
+
+    .col-span-12 {
+      grid-column: span 12 / span 12;
+    }
+
+    .contents-tit {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @include rem(font-size, 24);
+      font-weight: 500;
+      color: $guide-primary-dark;
+    }
+
+    .contents-desc {
+      @include rem(margin-bottom, 10);
+      @include rem(font-size, 18);
+      font-weight: 500;
+
+      .info {
+        @include rem(margin-left, 4);
+        @include rem(font-size, 16);
+        color: $guide-secondary;
+      }
+    }
+
+    .contents-gap {
+      @include rem(margin-top, 20);
+
+      &.child-gap {
+        display: flex;
+        flex-direction: column;
+        @include rem(gap, 20);
+      }
+    }
+
+    .btn-wrap {
+      display: flex;
+      @include rem(gap, 16);
+      @include rem(margin-top, 20);
+
+      &.col {
+        flex-direction: column;
+      }
+
+      .guide-btn,
+      .btn-trigger {
+        flex: 1 auto;
+        display: block;
+        width: 100%;
+        @include rem(height, 50);
+        @include rem(border-radius, 12);
+        border: 1px solid $line-dddddd;
+        @include rem(font-size, 16);
+        text-align: center;
+        transition: .2s background-color cubic-bezier(0.19, 1, 0.22, 1);
+
+        &:hover {
+          background-color: $bg-eeeeee;
+        }
+      }
+    }
+  }
+
+  .error-data,
+  .no-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc((100vh - $header-height));
+
+    &>div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      @include rem(gap, 20);
+    }
+
+    svg {
+      color: $guide-primary-dark;
+    }
+
+    p {
+      @include rem(font-size, $f24);
+      line-height: $l24;
+    }
+
+    a {
+      @include underline-effect($guide-primary-dark, $f20, $l20, -8, 2);
+    }
+  }
+}
+
+/* styles.scss */
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  margin-bottom: 20px;
+}
+
+.text {
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.text-blue {
+  color: blue;
+}
+
+.text-green {
+  color: green;
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+// button {
+//   margin-right: 10px;
+//   padding: 5px 10px;
+// }

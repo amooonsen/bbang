@@ -1,0 +1,302 @@
+@use '../abstracts' as *;
+
+// alert dialog 공통 속성
+.alert-overlay,
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: $base-z-index;
+  // backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.4);
+  animation-duration: 0.2s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.alert-overlay[data-state='open'],
+.dialog-overlay[data-state='open'] {
+  animation-name: overlayShow;
+}
+
+.alert-overlay[data-state='closed'],
+.dialog-overlay[data-state='closed'] {
+  animation-name: overlayHide;
+}
+
+.component-alert,
+.component-dialog {
+  background-color: $bg-ffffff;
+  box-shadow: $kpmg-glass-shadow;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: $base-z-index + 1;
+  width: auto;
+  transform: translate(-50%, -50%);
+  animation-duration: 0.25s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.component-alert[data-state='open'],
+.component-dialog[data-state='open'] {
+  animation-name: contentShow;
+}
+
+.component-alert[data-state='closed'],
+.component-dialog[data-state='closed'] {
+  animation-name: contentHide;
+}
+
+.component-alert:focus,
+.component-dialog:focus {
+  outline: none;
+}
+
+.alert-close-btn,
+.dialog-close-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  @include rem(width, 40);
+  @include rem(height, 40);
+  cursor: pointer;
+}
+
+// alert 설정
+.component-alert {
+  @include rem(min-width, 436);
+  text-align: center;
+
+  .hgroup-component {
+    @include rem(margin, 64 0 56);
+    @include rem(padding, 0 80);
+  }
+
+  .alert-title {
+    @include rem(font-size, $f24);
+    line-height: $l24;
+    font-weight: 700;
+  }
+
+  .alert-description {
+    @include rem(margin-top, 8);
+    @include rem(font-size, $f18);
+    line-height: $l18;
+  }
+
+  .alert-action-zone {
+    display: flex;
+
+    button,
+    a {
+      width: auto;
+    }
+  }
+}
+
+// dialog 설정
+.component-dialog {
+  height: 100%;
+  max-height: calc(100vh - 9.6rem);
+  @include rem(min-width, 908);
+
+  .dialog-title {
+    display: flex;
+    @include rem(height, 72);
+    justify-content: space-between;
+    align-items: center;
+    @include rem(padding, 16 24 16 40);
+    @include rem(font-size, $f24);
+    line-height: $l24;
+    font-weight: 700;
+  }
+
+  .dialog-description {
+    @include rem(font-size, $f16);
+    line-height: $l16;
+  }
+
+  .dialog-body {
+    height: calc(100% - 7.2rem);
+    @include rem(padding, 0 119 64);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .dialog-action-zone {
+    display: flex;
+    justify-content: center;
+
+    button {
+      flex: none;
+    }
+  }
+}
+
+// ############################################# Mo #############################################
+@media (max-width: 1076px) {
+  .component-dialog[data-state='open'] {
+    animation-name: contentShowMobile;
+  }
+
+  .component-alert[data-state='open'] {
+    animation-name: contentShow;
+  }
+
+  .component-dialog[data-state='closed'] {
+    animation-name: contentHideMobile;
+  }
+
+  .component-alert[data-state='closed'] {
+    animation-name: contentHide;
+  }
+
+  .alert-close-btn,
+  .dialog-close-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    @include rem(width, 40);
+    @include rem(height, 40);
+    cursor: pointer;
+  }
+
+  // alert 설정
+  .component-alert {
+    @include rem(min-width, 436);
+    text-align: center;
+
+    .hgroup-component {
+      @include rem(margin, 64 0 56);
+      @include rem(padding, 0 80);
+    }
+
+    .alert-title {
+      @include rem(font-size, $f24);
+      line-height: $l24;
+      font-weight: 700;
+    }
+
+    .alert-description {
+      @include rem(margin-top, 8);
+      @include rem(font-size, $f18);
+      line-height: $l18;
+    }
+
+    .alert-action-zone {
+      display: flex;
+
+      button,
+      a {
+        width: auto;
+      }
+    }
+  }
+
+  // dialog 설정
+  .component-dialog {
+    width: 100%;
+    min-width: auto;
+    min-height: 100vh;
+
+    .dialog-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @include rem(padding, 20 24);
+      @include rem(font-size, $f24);
+      line-height: $l24;
+      font-weight: 700;
+    }
+
+    .dialog-description {
+      @include rem(font-size, $f16);
+      line-height: $l16;
+    }
+
+    .dialog-body {
+      padding: 0;
+      // @include rem(padding, 0 24);
+    }
+
+    .dialog-action-zone {
+      display: flex;
+      justify-content: center;
+
+      button {
+        flex: none;
+      }
+    }
+  }
+}
+
+// ############################################# Keyframes #############################################
+
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes contentShowMobile {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes overlayHide {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes contentHide {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.9);
+  }
+}
+
+@keyframes contentHideMobile {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, 100%);
+  }
+}

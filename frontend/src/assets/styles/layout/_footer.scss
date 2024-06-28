@@ -1,0 +1,91 @@
+@use '../abstracts' as *;
+
+.footer {
+  @include rem(height, 257);
+  background-color: $bg-444444;
+  .footer-contents {
+    width: 100%;
+    height: 100%;
+    @include rem(max-width, 1380);
+    @include rem(padding, 40 0 88);
+    margin: 0 auto;
+  }
+  .footer-top-area {
+    display: flex;
+    justify-content: space-between;
+  }
+  .foot-menu-list {
+    display: flex;
+    flex-wrap: wrap;
+    @include rem(gap, 0 32);
+  }
+  .foot-menu-item {
+    position: relative;
+    &::after {
+      content: '';
+      display: inline-block;
+      @include rem(width, 1);
+      @include rem(height, 12);
+      position: absolute;
+      top: 50%;
+      @include rem(right, -16);
+      transform: translate3d(0, -50%, 0);
+      background-color: $font-777777;
+    }
+    &:last-child {
+      &::after {
+        display: none;
+      }
+    }
+    a {
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      font-weight: 700;
+      color: $font-aaaaaa;
+    }
+  }
+  .foot-top-txt {
+    @include rem(font-size, $f18);
+    line-height: $l18;
+    font-weight: 500;
+    color: $font-777777;
+  }
+  .footer-txt-area {
+    @include rem(margin-top, 36);
+  }
+  .foot-txt {
+    @include rem(font-size, $f16);
+    line-height: $l16;
+    font-weight: 400;
+    color: $font-777777;
+  }
+}
+
+// ############################################# Mo #############################################
+@media (min-width: 1077px) and (max-width: 1700px) {
+  .footer {
+    .footer-contents {
+      @include rem(padding-left, 24);
+      @include rem(padding-right, 24);
+    }
+  }
+}
+
+@media (max-width: 1076px) {
+  .footer {
+    height: auto;
+    .footer-contents {
+      @include rem(padding, 40 24 72);
+    }
+    .footer-top-area {
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .foot-top-txt {
+      @include rem(margin-top, 20);
+    }
+    .footer-txt-area {
+      @include rem(margin-top, 48);
+    }
+  }
+}

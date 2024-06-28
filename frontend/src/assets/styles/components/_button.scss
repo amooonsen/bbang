@@ -1,0 +1,309 @@
+@use '../abstracts' as *;
+
+.btn {
+  &.large {
+    flex: 1;
+    transition: transform $custom-duration $custom-ease;
+
+    &.size-64 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include rem(width, 256);
+      @include rem(height, 64);
+      @include rem(font-size, $f18);
+      line-height: $l18;
+      font-weight: 500;
+      background: $primary;
+      color: $font-ffffff;
+
+      &.mono {
+        border: 1.5px solid $line-0F223A;
+        color: $font-0F223A;
+        background: $bg-ffffff;
+      }
+
+      &.disabled {
+        background: $bg-e5e5e5;
+        color: $font-aaaaaa;
+      }
+
+      &.secondary {
+        background: $bg-f5f5f5;
+        color: $font-444444;
+      }
+
+      &:active {
+        transform: translateY(2px);
+      }
+    }
+
+    &.size-56 {
+      width: 100%;
+      @include rem(min-height, 56);
+      @include rem(padding, 0 40);
+      border: 1.5px solid $secondary01;
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      font-weight: 500;
+      color: $secondary01;
+      white-space: nowrap;
+
+      &.disabled {
+        border: none;
+        background: $bg-e5e5e5;
+        color: $font-aaaaaa;
+      }
+    }
+  }
+
+  &.regular {}
+
+  &.small {
+    &.more-list {
+      position: relative;
+      @include rem(height, 60);
+      transition: 0.2s all $custom-ease;
+
+      .line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include rem(width, 46);
+        height: 100%;
+        border: 1px solid $global-font-color;
+        transition: 0.2s all $custom-ease;
+      }
+
+      .txt {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        width: calc(100% - 2px);
+        height: calc(100% - 2rem);
+        @include rem(padding-left, 36);
+        @include rem(font-size, $f18);
+        line-height: $l18;
+        white-space: nowrap;
+        background: $bg-ffffff;
+        transition: 0.2s all $custom-ease;
+      }
+
+      &:hover {
+        @include rem(padding, 0 18);
+
+        .line {
+          width: 100%;
+        }
+
+        .txt {
+          width: 100%;
+          z-index: 0;
+          padding-left: 0;
+          background: transparent;
+        }
+      }
+    }
+
+    &.view-detail {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include rem(width, 72);
+      @include rem(height, 56);
+      overflow: hidden;
+      transform: skewX(-20deg);
+
+      &.type02 {
+        @include rem(width, 56);
+        transform: skewX(-16deg);
+
+        .original-arrow {
+          transform: skewX(16deg);
+        }
+
+        &:hover {
+          .hide-arrow {
+            animation: enterMoreArrow02 0.3s forwards;
+          }
+        }
+      }
+
+      svg {
+        position: relative;
+      }
+
+      .original-arrow {
+        transform: skewX(20deg);
+      }
+
+      .hide-bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        background: $primary-gradient;
+        transform-origin: center center;
+        animation: leaveHideBackground 0.3s forwards;
+        animation-delay: 0.1s;
+        animation-timing-function: cubic-bezier(0.16, 0.88, 0.49, 0.99);
+      }
+
+      .hide-arrow {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        z-index: 2;
+        transform: translateY(-50%) translateX(-100%);
+        animation: leaveMoreArrow 0.3s forwards;
+        animation-timing-function: cubic-bezier(0.16, 0.88, 0.49, 0.99);
+      }
+
+      &:hover {
+        .hide-bg {
+          animation: enterHideBackground 0.3s forwards;
+          animation-timing-function: cubic-bezier(0.16, 0.88, 0.49, 0.99);
+        }
+
+        .hide-arrow {
+          animation: enterMoreArrow 0.3s forwards;
+          animation-delay: 0.1s;
+          animation-timing-function: cubic-bezier(0.16, 0.88, 0.49, 0.99);
+        }
+      }
+    }
+  }
+
+  &.custom {
+    &.btn-teaser-trigger {
+      position: absolute;
+      top: 50%;
+      @include rem(right, 20);
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      @include rem(width, 24);
+      @include rem(height, 24);
+      transform: translateY(-50%);
+    }
+  }
+}
+
+// [공통] 스와이퍼 버튼
+
+.swiper-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  @include rem(width, 72);
+  @include rem(height, 72);
+  border-radius: 100%;
+  background: $bg-ffffff;
+  box-shadow: $kpmg-glass-shadow;
+  cursor: pointer;
+
+  .arrow {
+    &::after {
+      border-top: 1.5px solid $secondary01;
+      border-right: 1.5px solid $secondary01;
+      @include rem(width, 20);
+      @include rem(height, 20);
+      left: 45%;
+    }
+  }
+
+  &.prev {
+    @include rem(left, -35);
+
+    .arrow {
+      &::after {
+        left: 55%;
+        // right: 45%;
+        transform: translate(-50%, -50%) rotate(225deg);
+      }
+    }
+  }
+
+  &.next {
+    @include rem(right, -35);
+  }
+
+  &.disabled {
+    background: $bg-e5e5e5;
+    cursor: default;
+
+    .arrow {
+      &::after {
+        border-top: 1.5px solid $line-aaaaaa;
+        border-right: 1.5px solid $line-aaaaaa;
+      }
+    }
+  }
+}
+
+// ############################################# Mo #############################################
+@media (max-width: 1023px) {
+  .view-detail {
+
+    .hide-arrow,
+    .hide-bg {
+      display: none;
+    }
+  }
+}
+
+// ############################################# Keyframes #############################################
+
+@keyframes enterMoreArrow {
+  from {
+    transform: translateX(-100%) translateY(-50%) skewX(20deg);
+  }
+
+  to {
+    transform: translateX(100%) translateY(-50%) skewX(20deg);
+  }
+}
+
+@keyframes enterMoreArrow02 {
+  from {
+    transform: translateX(-130%) translateY(-50%) skewX(16deg);
+  }
+
+  to {
+    transform: translateX(70%) translateY(-50%) skewX(16deg);
+  }
+}
+
+@keyframes leaveMoreArrow {
+  from {
+    transform: translateX(100%) translateY(-50%) skewX(20deg);
+  }
+
+  to {
+    transform: translateX(-100%) translateY(-50%) skewX(20deg);
+  }
+}
+
+@keyframes enterHideBackground {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes leaveHideBackground {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}

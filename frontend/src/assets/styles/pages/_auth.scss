@@ -1,0 +1,515 @@
+@use '../abstracts' as *;
+
+// 공통
+
+.centered-layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - $header-height);
+
+  .hgroup-component {
+    @include rem(margin-top, 120);
+    text-align: center;
+
+    .sub-copy-tit {
+      color: $font-ffffff;
+      font-weight: 700;
+
+      &.type01 {
+        @include rem(font-size, $f64);
+        line-height: $l64;
+      }
+
+      &.type02 {
+        @include rem(font-size, $f40);
+        line-height: $l40;
+      }
+    }
+
+    .sub-copy-desc {
+      @include rem(margin-top, 12);
+      @include rem(font-size, $f18);
+      line-height: $l18;
+      color: $font-ffffff;
+      font-weight: 400;
+    }
+  }
+}
+
+.centered-contents {
+  @include rem(min-width, 672);
+  @include rem(margin-top, 72);
+  @include rem(padding, 64 120);
+  background: $bg-ffffff;
+
+  .input-wrap {
+    &:not(:first-child) {
+      @include rem(margin-top, 24);
+    }
+  }
+
+  .btn-wrap {
+    display: flex;
+    @include rem(gap, 16);
+    @include rem(margin-top, 56);
+  }
+
+  .notice-txt {
+    @include rem(font-size, $f18);
+    line-height: $l18;
+    text-align: center;
+  }
+}
+
+.centered-layout-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  // 로그인
+  &.login-bg {
+    background-image: url('/images/mypage/bg_mypage_withdrawal.jpg');
+  }
+
+  // 아이디 찾기
+  &.find-id-bg {}
+
+  // 비밀번호 찾기
+  &.find-password-bg {}
+
+  // 404
+  &.not-found-bg {}
+}
+
+// 회원가입
+.section-join {
+  .term-item {
+    +.term-item {
+      @include rem(margin-top, 40);
+    }
+
+    &.top-line {
+      @include rem(padding-top, 40);
+      border-top: 1px solid $line-eeeeee;
+    }
+  }
+
+  .term-tit {
+    @include rem(margin-bottom, 16);
+    @include rem(font-size, $f18);
+    line-height: $l18;
+    font-weight: 700;
+
+    .required-text {
+      color: $secondary05;
+    }
+  }
+
+  .term-box {
+    @include rem(padding, 24 28);
+    background-color: $bg-f5f5f5;
+
+    .tit {
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      font-weight: 700;
+    }
+
+    .desc {
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      font-weight: 500;
+
+      &.big-txt {
+        font-weight: 700;
+      }
+    }
+
+    .list {
+      @include rem(margin, 16 0);
+
+      li {
+        @include rem(padding-left, 12);
+        position: relative;
+        @include rem(font-size, $f14);
+        line-height: $l14;
+        font-weight: 500;
+        color: $font-444444;
+
+        &::before {
+          content: '';
+          display: inline-block;
+          @include rem(width, 4);
+          @include rem(height, 4);
+          position: absolute;
+          left: 0;
+          @include rem(top, 8);
+          background-color: $bg-444444;
+          border-radius: 50%;
+          vertical-align: middle;
+        }
+
+        +li {
+          @include rem(margin-top, 8);
+        }
+      }
+    }
+
+    +.input-wrap {
+      @include rem(margin-top, 20);
+
+      label {
+        margin-bottom: 0;
+      }
+    }
+
+    +.component-radio-group {
+      @include rem(margin-top, 20);
+
+
+    }
+  }
+
+  .table-wrap {
+    @include rem(margin, 24 0 8);
+  }
+
+  .term-table {
+    border-top: 1.5px solid $line-0F223A;
+
+    tr {
+      border-bottom: 1px solid $line-e5e5e5;
+    }
+
+    th {
+      @include rem(padding, 12 0);
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    td {
+      @include rem(padding, 16 20);
+      @include rem(font-size, $f14);
+      line-height: $l14;
+      font-weight: 500;
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        border-right: 1px solid $line-e5e5e5;
+      }
+
+      &.bold-txt {
+        font-weight: 700;
+      }
+    }
+  }
+
+  .btn-wrap {
+    @include rem(margin-top, 64);
+  }
+}
+
+.join-layout {
+  .component-input-group {
+    display: flex;
+    @include rem(gap, 8);
+    align-items: center;
+    @include rem(font-size, $f16);
+    line-height: $l16;
+    font-weight: 500;
+
+    .input-wrap {
+      flex: 1;
+
+      +.input-wrap {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .component-radio-group {
+    display: flex;
+
+    .item-wrap {
+      +.item-wrap {
+        @include rem(margin-left, 40);
+      }
+    }
+  }
+
+  .form-item {
+    +.form-item {
+      @include rem(margin-top, 40);
+    }
+  }
+
+  .form-tit {
+    @include rem(margin-bottom, 12);
+    @include rem(font-size, $f18);
+    line-height: $l18;
+    font-weight: 700;
+  }
+
+  .input-wrap,
+  .form-item {
+    .form-message {
+      position: static;
+      @include rem(margin-top, 8);
+      @include rem(font-size, $f12);
+      line-height: $l12;
+
+      &.valid,
+      &.invalid {
+        display: inline-flex;
+        align-items: center;
+
+        &::before {
+          content: '';
+          display: inline-block;
+          @include rem(margin-right, 4);
+          @include rem(width, 16);
+          @include rem(height, 16);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+        }
+      }
+
+      &.valid {
+        color: $primary;
+
+        &::before {
+          background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 7.5L6.75 11L13 5' stroke='%231547D5' stroke-width='1.5'/%3E%3C/svg%3E%0A");
+        }
+      }
+
+      &.invalid {
+        &::before {
+          background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_3_32)'%3E%3Cpath d='M3 13L13 3' stroke='%23D51515' stroke-width='1.5'/%3E%3Cpath d='M13 13L3 3' stroke='%23D51515' stroke-width='1.5'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_3_32'%3E%3Crect width='12' height='12' fill='white' transform='translate(2 2)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+        }
+      }
+    }
+
+    &.type02 {
+      .form-input {
+        background-color: $bg-e5e5e5;
+      }
+    }
+  }
+
+  .components-layout {
+    &.flex-row {
+      display: flex;
+      @include rem(gap, 8);
+      align-items: center;
+
+      .select-trigger {
+        @include rem(width, 180);
+        @include rem(height, 56);
+        border: 1px solid transparent;
+      }
+
+      .input-wrap {
+        flex: 1;
+
+        +.input-wrap {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &.flex-col {
+      display: flex;
+      flex-direction: column;
+      @include rem(gap, 8);
+    }
+  }
+
+  .btn-send-wrap {
+    @include rem(margin-top, 8);
+  }
+
+  .form-box {
+    @include rem(padding, 24 28);
+    border: 1px solid $line-eeeeee;
+
+    .txt {
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      font-weight: 700;
+    }
+
+    .component-radio-group {
+      @include rem(margin-top, 24);
+    }
+  }
+
+  .component-checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    @include rem(gap, 24 40);
+    @include rem(margin-top, 20);
+
+    .component-checkbox~.input-label {
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      color: $font-444444;
+    }
+  }
+
+  .agree-msg {
+    @include rem(padding, 12 16);
+    @include rem(margin-top, 24);
+    @include rem(font-size, $f14);
+    line-height: $l14;
+    font-weight: 500;
+    background-color: $bg-F1F5FD;
+  }
+}
+
+// 로그인
+.section-login {
+  .centered-contents {
+    margin-top: 0;
+    @include rem(width, 672);
+    @include rem(padding, 88 164);
+  }
+
+  .cont-head {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    @include rem(gap, 10);
+
+    strong {
+      @include rem(font-size, $f18);
+      line-height: $l18;
+      color: $secondary01;
+      font-weight: 500;
+    }
+  }
+
+  .cont-form {
+    @include rem(margin-top, 40);
+
+    .form-options-group {
+      display: flex;
+      justify-content: space-between;
+      @include rem(margin-top, 16);
+
+      .find-user-zone {
+        display: flex;
+        align-items: center;
+        @include rem(gap, 8);
+        @include rem(font-size, $f14);
+        line-height: $l14;
+        color: $font-777777;
+      }
+    }
+
+    .btn-wrap {
+      @include rem(margin-top, 40);
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  .signup-zone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include rem(gap, 16);
+    @include rem(margin-top, 18);
+    @include rem(font-size, $f14);
+    line-height: $l14;
+
+    .signup-desc {
+      color: $font-777777;
+    }
+
+    .signup-link {
+      position: relative;
+      color: $font-444444;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: #000;
+      }
+    }
+  }
+}
+
+// ############################################# Mo #############################################
+@media (max-width: 1076px) {
+
+  // 회원가입
+  .section-join {
+    .term-item {
+      +.term-item {
+        @include rem(margin-top, 36);
+      }
+    }
+  }
+
+  .join-layout {
+    .form-item {
+      +.form-item {
+        @include rem(margin-top, 36);
+      }
+    }
+
+    .form-box {
+      @include rem(padding, 20);
+
+      .separator {
+        transform: translateY(-0.4rem);
+      }
+    }
+
+    .components-layout {
+      &.flex-row {
+        flex-direction: column;
+
+        >div,
+        .input-wrap {
+          width: 100%;
+        }
+
+        .select-trigger {
+          width: 100%;
+        }
+      }
+    }
+
+    .component-checkbox-group {
+      @include rem(gap, 24 0);
+
+      .checkbox-wrapper:nth-child(odd) {
+        flex: 0 0 13.2rem;
+      }
+
+      .checkbox-wrapper:nth-child(even) {
+        flex: 0 0 calc(100% - 13.2rem);
+      }
+    }
+
+    .agree-msg {
+      color: $secondary01;
+    }
+  }
+}
+
+// ############################################# Keyframes #############################################

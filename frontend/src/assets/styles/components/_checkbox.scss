@@ -1,0 +1,177 @@
+@use "../abstracts" as *;
+
+// checkbox
+.checkbox-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  @include rem(gap, 12);
+
+  label {
+    margin-bottom: 0;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  &.single {
+    @include rem(gap, 8);
+
+    .input-label {
+      @include rem(font-size, $f14);
+      line-height: $l14;
+      color: $font-777777;
+    }
+  }
+
+  &.container {
+    border: 1px solid $line-eeeeee;
+    @include rem(padding, 16 20);
+    @include rem(gap, 12);
+
+    .input-label {
+      @include rem(font-size, $f16);
+      line-height: $l16;
+      color: $global-font-color;
+    }
+
+    .btn-trigger {
+      position: absolute;
+      top: auto;
+      @include rem(right, 16);
+      @include rem(padding, 16);
+
+      .arrow {
+        &::after {
+          left: 50%;
+          @include rem(width, 8);
+          @include rem(height, 8);
+          border-top: 1px solid $global-font-color;
+          border-right: 1px solid $global-font-color;
+        }
+      }
+    }
+  }
+}
+
+.component-checkbox {
+  position: relative;
+  border: 1.5px solid $line-eeeeee;
+  overflow: hidden;
+
+  &.size-24 {
+    @include rem(width, 24);
+    @include rem(height, 24);
+  }
+
+  &.size-16 {
+    @include rem(width, 16);
+    @include rem(height, 16);
+  }
+
+  &~.input-label {
+    margin-bottom: 0;
+    @include rem(font-size, $f14);
+    line-height: $l14;
+    color: $font-777777;
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+
+    path {
+      stroke-dasharray: 10;
+      stroke-dashoffset: 0;
+    }
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: $primary;
+    transform: scale(1);
+
+  }
+
+  &[data-state='unchecked'] {
+    svg {
+      path {
+        animation: removeCheck 0.3s linear forwards;
+      }
+    }
+
+    &::after {
+      opacity: 0;
+      animation: unfillBackground .1s $custom-ease;
+    }
+  }
+
+  &[data-state='checked'] {
+    border: 1px solid transparent;
+
+    svg {
+      path {
+        animation: drawCheck 0.3s linear forwards;
+      }
+    }
+
+    &::after {
+      animation: fillBackground .1s $custom-ease;
+    }
+  }
+}
+
+@keyframes fillBackground {
+  from {
+    opacity: 0;
+    transform: scale(1.05)
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes unfillBackground {
+  from {
+    opacity: 1;
+    transform: scale(1)
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes drawCheck {
+  from {
+    stroke-dashoffset: 10;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes removeCheck {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: 10;
+  }
+}
+
+// ############################################# Mo #############################################
+@media (max-width: 1023px) {}

@@ -1,0 +1,140 @@
+@use "../abstracts" as *;
+
+// 리액트 포탈의 특성상 각각 trigger와 컨텐츠 영역 분리
+
+// 공통 멀티 셀렉트 wrapper
+.select-wrap {
+  display: flex;
+  align-items: center;
+  @include rem(gap, 8);
+
+  &.connect-number {
+    @include rem(margin-top, 24);
+    align-items: flex-end;
+
+    .input-wrap {
+      &:not(:first-child) {
+        margin-top: 0;
+        flex: 1;
+      }
+    }
+
+    .select-trigger {
+      @include rem(min-width, 160);
+    }
+
+    .connect-number-label {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  &.flex-row {
+    &>div {
+      flex: 1;
+    }
+  }
+}
+
+// 공통 select-trigger
+.select-trigger {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  @include rem(height, 56);
+  @include rem(padding, 0 20);
+  @include rem(font-size, $f16);
+  line-height: $l16;
+  background: $bg-f5f5f5;
+  transition: background $custom-duration $custom-ease;
+
+  svg {
+    transition: all $custom-duration $custom-ease;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    @include rem(height, 16);
+    z-index: -1;
+    transition: background $custom-duration $custom-ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    @include rem(height, 16);
+    z-index: -1;
+    transition: background $custom-duration $custom-ease;
+  }
+
+  &[data-state="open"] {
+    box-shadow: $kpmg-glass-shadow;
+    background: $bg-ffffff;
+    border-bottom: 1px solid $line-eeeeee;
+
+    &::before,
+    &::after {
+      z-index: 2;
+      background: $bg-ffffff;
+    }
+
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// 공통 select-content
+.select-content {
+  width: var(--radix-select-trigger-width);
+  @include rem(max-height, 280);
+  @include rem(font-size, $f16);
+  line-height: $l16;
+  background: $bg-ffffff;
+
+  .select-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    @include rem(padding, 0 20);
+    @include rem(height, 56);
+    transition: all $custom-duration $custom-ease;
+    cursor: pointer;
+
+    &:hover {
+      background: $bg-f5f5f5;
+    }
+
+    &[data-state="checked"] {
+
+      .select-indicator {
+        position: absolute;
+        top: 50%;
+        @include rem(left, 20);
+        transform: translateY(-50%);
+        color: $primary;
+
+        &+span {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  &[data-state="open"] {
+    box-shadow: $kpmg-glass-shadow;
+  }
+
+}
+
+// ############################################# Mo #############################################
+@media (max-width: 1023px) {}
