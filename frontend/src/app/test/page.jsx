@@ -4,6 +4,6 @@ import React from 'react'
 
 export default function page() {
   return (
-    <div>수영 상세 작업</div>
+    <div className='sub-container'>수영 상세 작업</div>
   )
 }
