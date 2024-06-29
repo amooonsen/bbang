@@ -1,10 +1,6 @@
-import { Accordion } from "@radix-ui/react-accordion";
-import Image from "next/image"
+import {Accordion} from "@radix-ui/react-accordion";
+import Image from "next/image";
 
 export default function Home() {
-  return (
-  <main>
-    
-  </main>
-  );
+  return <div></div>;
 }
